@@ -22,8 +22,8 @@
     SPTPersistentCacheOptions *options = [SPTPersistentCacheOptions new];
     options.cachePath = self.cachePath;
     options.cacheIdentifier = self.cacheIdentifier;
-    options.defaultExpirationPeriod = 60 * 60 * 24 * 7;
-    options.garbageCollectionInterval = SPTPersistentCacheDefaultGCIntervalSec;
+    options.defaultExpirationPeriod = 60 * 60 * 24 * 30;
+    options.garbageCollectionInterval = (NSUInteger)(1.5 * SPTPersistentCacheDefaultGCIntervalSec);
     options.sizeConstraintBytes = 1024 * 1024 * 100; // 100 MB
     options.useDirectorySeparation = NO;
 
@@ -102,7 +102,9 @@
         handler(RCTVideoCacheStatusNotAvailable, nil);
         return;
       }
-      handler(RCTVideoCacheStatusAvailable, response.record.data);
+
+      handler(RCTVideoCacheStatusNotAvailable, nil);
+      // handler(RCTVideoCacheStatusAvailable, response.record.data);
     } onQueue:dispatch_get_main_queue()];
   } @catch (NSError * err) {
     switch (err.code) {
