@@ -4,7 +4,7 @@ Caching is currently only supported on `iOS` platforms with a CocoaPods setup.
 
 # Technology
 
-The cache is backed by [SPTPersistentCache](https://github.com/spotify/SPTPersistentCache) and [DVAssetLoaderDelegate](https://github.com/vdugnist/DVAssetLoaderDelegate).
+The cache is backed by [SPTPersistentCache](https://github.com/spotify/SPTPersistentCache)
 
 # How Does It Work
 

@@ -5,21 +5,16 @@
 #import "RCTVideoPlayerViewControllerDelegate.h"
 #import <React/RCTComponent.h>
 #import <React/RCTBridgeModule.h>
-
-#if __has_include(<react-native-video/RCTVideoCache.h>)
 #import <react-native-video/RCTVideoCache.h>
-#import <DVAssetLoaderDelegate/DVURLAsset.h>
-#import <DVAssetLoaderDelegate/DVAssetLoaderDelegate.h>
-#endif
+#import <react-native-video/DVURLAsset.h>
+#import <react-native-video/DVAssetLoaderDelegate.h>
 
 @class RCTEventDispatcher;
-#if __has_include(<react-native-video/RCTVideoCache.h>)
 @interface RCTVideo : UIView <RCTVideoPlayerViewControllerDelegate, DVAssetLoaderDelegatesDelegate, AVAssetResourceLoaderDelegate>
 #elif TARGET_OS_TV
 @interface RCTVideo : UIView <RCTVideoPlayerViewControllerDelegate, AVAssetResourceLoaderDelegate>
 #else
 @interface RCTVideo : UIView <RCTVideoPlayerViewControllerDelegate, AVPictureInPictureControllerDelegate, AVAssetResourceLoaderDelegate>
-#endif
 
 @property (nonatomic, copy) RCTDirectEventBlock onVideoLoadStart;
 @property (nonatomic, copy) RCTDirectEventBlock onVideoLoad;
