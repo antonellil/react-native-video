@@ -21,8 +21,7 @@
   if (self = [super init]) {
     self.cacheIdentifier = @"rct.video.cache";
     self.temporaryCacheIdentifier = @"rct.video.temporarycache";
-    //self.temporaryCachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:self.temporaryCacheIdentifier];
-    self.temporaryCachePath = [NSTemporaryDirectory() stringByAppendingPathComponent:self.temporaryCacheIdentifier];
+    self.temporaryCachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:self.temporaryCacheIdentifier];
     self.cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:self.cacheIdentifier];
     SPTPersistentCacheOptions *options = [SPTPersistentCacheOptions new];
     options.cachePath = self.cachePath;
@@ -36,16 +35,7 @@
       NSLog(@"Dat Video Cache: %@", string);
     };
 #endif
-
-    NSArray* temp = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.temporaryCachePath error:NULL];
-
-    for (NSString *file in temp) {
-      NSLog(@"Removing Video Cache FILE UAHSDUS ==========: %@", file);
-      [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@%@", self.temporaryCachePath, file] error:NULL];
-    }
-
     [self createTemporaryPath];
-
     self.videoCache = [[SPTPersistentCache alloc] initWithOptions:options];
     [self.videoCache scheduleGarbageCollector];
   }
@@ -54,9 +44,6 @@
 }
 
 - (void) createTemporaryPath {
-  NSLog(@"Dat Huh Huh 1: %@", self.temporaryCachePath);
-  NSLog(@"Dat Huh Wuh 2: %@", self.cachePath);
-
   NSError *error = nil;
   BOOL success = [[NSFileManager defaultManager] createDirectoryAtPath:self.temporaryCachePath
                                            withIntermediateDirectories:YES
