@@ -101,6 +101,7 @@ static int const RCTVideoUnset = -1;
     _playbackStalled = NO;
     _rate = 1.0;
     _volume = 1.0;
+    _muted = true;
     _resizeMode = @"AVLayerVideoGravityResizeAspectFill";
     _fullscreenAutorotate = YES;
     _fullscreenOrientation = @"all";
