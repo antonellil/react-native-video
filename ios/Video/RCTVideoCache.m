@@ -5,6 +5,7 @@
 @synthesize videoCache;
 @synthesize cachePath;
 @synthesize cacheIdentifier;
+@synthesize temporaryCacheIdentifier;
 @synthesize temporaryCachePath;
 
 + (RCTVideoCache *)sharedInstance {
@@ -19,7 +20,8 @@
 - (id)init {
   if (self = [super init]) {
     self.cacheIdentifier = @"rct.video.cache";
-    self.temporaryCachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:self.cacheIdentifier];
+    self.temporaryCacheIdentifier = @"rct.video.temporarycache";
+    self.temporaryCachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:self.temporaryCacheIdentifier];
     self.cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:self.cacheIdentifier];
     SPTPersistentCacheOptions *options = [SPTPersistentCacheOptions new];
     options.cachePath = self.cachePath;
@@ -31,8 +33,6 @@
 #ifdef DEBUG
     options.debugOutput = ^(NSString *string) {
       NSLog(@"Dat Video Cache: %@", string);
-      NSLog(@"Dat Huh Huh 1: %@", self.temporaryCachePath);
-      NSLog(@"Dat Huh Wuh 2: %@", self.cachePath);
     };
 #endif
     [self createTemporaryPath];
@@ -43,6 +43,9 @@
 }
 
 - (void) createTemporaryPath {
+  NSLog(@"Dat Huh Huh 1: %@", self.temporaryCachePath);
+  NSLog(@"Dat Huh Wuh 2: %@", self.cachePath);
+
   NSError *error = nil;
   BOOL success = [[NSFileManager defaultManager] createDirectoryAtPath:self.temporaryCachePath
                                            withIntermediateDirectories:YES
