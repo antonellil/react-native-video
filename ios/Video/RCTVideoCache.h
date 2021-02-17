@@ -20,11 +20,13 @@ typedef NS_ENUM(NSUInteger, RCTVideoCacheStatus) {
   NSString * _Nullable cachePath;
   NSString * temporaryCachePath;
   NSString * _Nullable cacheIdentifier;
+  NSString * _Nullable temporaryCacheIdentifier;
 }
 
 @property(nonatomic, strong) SPTPersistentCache * _Nullable videoCache;
 @property(nonatomic, strong) NSString * cachePath;
 @property(nonatomic, strong) NSString * cacheIdentifier;
+@property(nonatomic, strong) NSString * temporaryCacheIdentifier;
 @property(nonatomic, strong) NSString * temporaryCachePath;
 
 + (RCTVideoCache *)sharedInstance;
