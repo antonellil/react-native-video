@@ -19,7 +19,7 @@
 - (id)init {
   if (self = [super init]) {
     self.cacheIdentifier = @"rct.video.cache";
-    self.temporaryCachePath = [NSTemporaryDirectory() stringByAppendingPathComponent:self.cacheIdentifier];
+    self.temporaryCachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:self.cacheIdentifier];
     self.cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:self.cacheIdentifier];
     SPTPersistentCacheOptions *options = [SPTPersistentCacheOptions new];
     options.cachePath = self.cachePath;
@@ -31,6 +31,8 @@
 #ifdef DEBUG
     options.debugOutput = ^(NSString *string) {
       NSLog(@"Dat Video Cache: %@", string);
+      NSLog(@"Dat Huh Huh 1: %@", self.temporaryCachePath);
+      NSLog(@"Dat Huh Wuh 2: %@", self.cachePath);
     };
 #endif
     [self createTemporaryPath];
