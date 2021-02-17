@@ -21,6 +21,7 @@
   if (self = [super init]) {
     self.cacheIdentifier = @"rct.video.cache";
     self.temporaryCacheIdentifier = @"rct.video.temporarycache";
+    // self.temporaryCachePath = [NSTemporaryDirectory() stringByAppendingPathComponent:self.cacheIdentifier];
     self.temporaryCachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:self.temporaryCacheIdentifier];
     self.cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:self.cacheIdentifier];
     SPTPersistentCacheOptions *options = [SPTPersistentCacheOptions new];
@@ -32,14 +33,13 @@
     options.useDirectorySeparation = NO;
 #ifdef DEBUG
     options.debugOutput = ^(NSString *string) {
-      NSLog(@"Dat Video Cache: %@", string);
+      NSLog(@"Video Cache: %@", string);
     };
 #endif
     [self createTemporaryPath];
     self.videoCache = [[SPTPersistentCache alloc] initWithOptions:options];
     [self.videoCache scheduleGarbageCollector];
   }
-
   return self;
 }
 
