@@ -380,7 +380,7 @@ static int const RCTVideoUnset = -1;
 
       self->_player = [AVPlayer playerWithPlayerItem:self->_playerItem];
 
-      // [self applyModifiers];
+      self->_player.muted = true;
 
       self->_player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
 
