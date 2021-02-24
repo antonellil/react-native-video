@@ -595,7 +595,7 @@ static int const RCTVideoUnset = -1;
                   didLoadData:(NSData *)data
                        forURL:(NSURL *)url {
   [_videoCache storeItem:data forUri:[url absoluteString] withCallback:^(BOOL success) {
-    DebugLog(@"Cache data stored successfully frfr 🎉");
+    DebugLog(@"Cache data stored successfully frfrfrfr 🎉");
   }];
 }
 
@@ -1024,13 +1024,31 @@ static int const RCTVideoUnset = -1;
 - (void)setMuted:(BOOL)muted
 {
   _muted = muted;
-  [self applyModifiers];
+
+  if (_muted) {
+    if (!_controls) {
+      [_player setVolume:0];
+    }
+    [_player setMuted:YES];
+  } else {
+    [_player setVolume:_volume];
+    [_player setMuted:NO];
+  }
 }
 
 - (void)setVolume:(float)volume
 {
   _volume = volume;
-  [self applyModifiers];
+
+  if (_muted) {
+    if (!_controls) {
+      [_player setVolume:0];
+    }
+    [_player setMuted:YES];
+  } else {
+    [_player setVolume:_volume];
+    [_player setMuted:NO];
+  }
 }
 
 - (void)setMaxBitRate:(float) maxBitRate {
@@ -1075,8 +1093,8 @@ static int const RCTVideoUnset = -1;
   [self setResizeMode:_resizeMode];
   [self setRepeat:_repeat];
   [self setPaused:_paused];
-  [self setControls:_controls];
   [self setAllowsExternalPlayback:_allowsExternalPlayback];
+  [self setControls:_controls];
 }
 
 - (void)setRepeat:(BOOL)repeat {
