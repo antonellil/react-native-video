@@ -42,6 +42,11 @@ public class ExoPlayerCache extends ReactContextBaseJavaModule {
         return "ExoPlayerCache";
     }
 
+    @Override
+    public boolean canOverrideExistingModule() {
+      return true;
+    }
+
     @ReactMethod
     public void initializeCache (@NonNull String cacheChildFolder, double cacheMaxSize) {
         _initializeCache(this.getReactApplicationContext(), cacheChildFolder, (new Double(cacheMaxSize)).longValue());
