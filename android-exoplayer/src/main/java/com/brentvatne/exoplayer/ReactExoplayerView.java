@@ -159,7 +159,6 @@ class ReactExoplayerView extends FrameLayout implements
     private String drmLicenseUrl = null;
     private String[] drmLicenseHeader = null;
     private boolean controls;
-    private boolean useCache;
     // \ End props
 
     // React
@@ -186,10 +185,10 @@ class ReactExoplayerView extends FrameLayout implements
             }
         }
     };
-    
+
     public double getPositionInFirstPeriodMsForCurrentWindow(long currentPosition) {
         Timeline.Window window = new Timeline.Window();
-        if(!player.getCurrentTimeline().isEmpty()) {    
+        if(!player.getCurrentTimeline().isEmpty()) {
             player.getCurrentTimeline().getWindow(player.getCurrentWindowIndex(), window);
         }
         return window.windowStartTimeMs + currentPosition;
@@ -499,7 +498,7 @@ class ReactExoplayerView extends FrameLayout implements
 
         MediaSource mediaSource = null;
 
-        if(this.useCache && type == C.TYPE_OTHER) {
+        if(type == C.TYPE_OTHER) {
             try {
                 Cache videoCache = ExoPlayerCache.getVideoCache(getContext());
                 DataSource.Factory cacheDataSourceFactory = new CacheDataSourceFactory(videoCache, mediaDataSourceFactory);
@@ -1400,14 +1399,5 @@ class ReactExoplayerView extends FrameLayout implements
                 removeViewAt(indexOfPC);
             }
         }
-    }
-
-    /**
-     * Handling useCache prop
-     *
-     * @param useCache  Use cache prop, if true enable cache, if false disable it
-     */
-    public void setUseCache(boolean useCache) {
-        this.useCache = useCache;
     }
 }
